@@ -26,14 +26,14 @@ export default function SideNavSheet({ children }: Readonly<SideNavSheetProps>) 
       <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <SheetTrigger asChild>
           <Button className="p-2.5 rounded-full md:hidden lg:hidden" variant="ghost">
-            <MenuIcon size={20} />
+            <MenuIcon />
           </Button>
         </SheetTrigger>
         <SheetContent className="flex flex-col overflow-y-auto">
           <SheetTitle className="hidden">Side Nav</SheetTitle>
           <Link href={'/'}>
             <Button variant={pathname === '/' ? 'secondary' : 'ghost'} className="gap-2">
-              <HomeIcon size={18} />
+              <HomeIcon />
               <span>천둥장터</span>
             </Button>
           </Link>

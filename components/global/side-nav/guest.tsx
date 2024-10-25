@@ -5,11 +5,11 @@ export default function SideNavGuest() {
   return (
     <nav className="flex gap-2 ml-auto">
       <NavLink href={'/signup'} inactiveVariant={'default'} activeVariant={'default'}>
-        <UserPlusIcon size={16} />
+        <UserPlusIcon />
         <span>회원가입</span>
       </NavLink>
       <NavLink href={'/signin'} inactiveVariant={'outline'}>
-        <KeySquareIcon size={16} />
+        <KeySquareIcon />
         <span>로그인</span>
       </NavLink>
     </nav>

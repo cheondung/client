@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { SideNavGuest, SideNavSheet, TopNavDefault, TopNavGuest } from '@/components/global';
+import { SideNavDynamic, SideNavSheet, TopNavDefault, TopNavDynamic } from '@/components/global';
 
 export default function GlobalHeader() {
   return (
@@ -13,10 +13,10 @@ export default function GlobalHeader() {
         </h1>
         <div className="hidden md:flex lg:flex justify-between gap-2 w-full">
           <TopNavDefault />
-          <TopNavGuest />
+          <TopNavDynamic />
         </div>
         <SideNavSheet>
-          <SideNavGuest />
+          <SideNavDynamic />
         </SideNavSheet>
       </div>
     </header>

@@ -21,10 +21,8 @@ export default function NavLink({
   const pathname = usePathname();
 
   return (
-    <Link href={href}>
-      <Button variant={pathname.startsWith(href) ? activeVariant : inactiveVariant} className="gap-2">
-        {children}
-      </Button>
-    </Link>
+    <Button variant={pathname.startsWith(href) ? activeVariant : inactiveVariant} className="gap-2 w-fit" asChild>
+      <Link href={href}>{children}</Link>
+    </Button>
   );
 }

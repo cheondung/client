@@ -1,30 +1,36 @@
+'use client';
+
 import { HeartIcon, LogOutIcon, ReceiptTextIcon, StoreIcon, UserCogIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from '@/components/global/nav/link';
 import { Separator } from '@/components/ui/separator';
+import { signOut } from '@/lib/auth';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function SideNavMember() {
+  const { unregisterSession, session } = useAuth();
+
   return (
     <>
       <NavLink href={'/my/info'}>
-        <UserCogIcon size={16} />
+        <UserCogIcon />
         <span>내 계정</span>
       </NavLink>
-      <NavLink href={'/store/TODO'}>
-        <StoreIcon size={16} />
+      <NavLink href={`/@${session?.id}`}>
+        <StoreIcon />
         <span>내 상점</span>
       </NavLink>
       <NavLink href={'/my/trade'}>
-        <ReceiptTextIcon size={16} />
+        <ReceiptTextIcon />
         <span>내 거래</span>
       </NavLink>
       <NavLink href={'/my/interest'}>
-        <HeartIcon size={16} />
+        <HeartIcon />
         <span>내 찜</span>
       </NavLink>
       <Separator />
-      <Button className="w-fit" variant={'outline'}>
-        <LogOutIcon size={16} />
+      <Button className="w-fit" variant={'outline'} onClick={() => signOut().then(unregisterSession)}>
+        <LogOutIcon />
         <span>로그아웃</span>
       </Button>
     </>
