@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ReactQueryProvider from '@/providers/react-query';
 import AuthProvider from '@/providers/auth';
+import ProductModalProvider from '@/providers/product-modal';
 import GlobalHeader from '@/components/global/header';
 import './globals.css';
 
@@ -18,8 +19,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <ReactQueryProvider>
           <TooltipProvider>
             <AuthProvider>
-              <GlobalHeader />
-              {children}
+              <ProductModalProvider>
+                <GlobalHeader />
+                {children}
+              </ProductModalProvider>
             </AuthProvider>
           </TooltipProvider>
         </ReactQueryProvider>
