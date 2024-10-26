@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ReactQueryProvider from '@/providers/react-query';
 import AuthProvider from '@/providers/auth';
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
             </AuthProvider>
           </TooltipProvider>
         </ReactQueryProvider>
+        <Toaster />
       </body>
     </html>
   );

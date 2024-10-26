@@ -1,5 +1,6 @@
 import ProductList from '@/components/product/list';
 import ProductListItem from '@/components/product/list-item';
+import ProductListSkeleton from '@/components/product/list-skeleton';
 import ProductSearchCard from '@/components/product/search/card';
 import ProductSearchCategory from '@/components/product/search/category';
 import ProductSearchQuery from '@/components/product/search/query';
@@ -15,6 +16,7 @@ import ProductControlChat from '@/components/product/control/chat';
 export {
   ProductList,
   ProductListItem,
+  ProductListSkeleton,
   ProductSearchCard,
   ProductSearchCategory,
   ProductSearchQuery,

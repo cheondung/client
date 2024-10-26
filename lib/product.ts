@@ -19,6 +19,8 @@ export const getProductDetail = (id: number) => serverAPI.get(`product/${id}`).j
 export const getProductCategories = () =>
   serverAPI.get('product/category', { cache: 'force-cache' }).json<ProductCategoryTree[]>();
 
+export const getInterestProducts = () => clientAPI.get('product/interest').json<Product[]>();
+
 export const isInterestProduct = (id: number) =>
   clientAPI.get(`product/${id}/interest`).then((res) => res.status === 200);
 

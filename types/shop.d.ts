@@ -4,3 +4,12 @@ interface Shop {
   introduction: string;
   avatar: string;
 }
+
+interface ShopDetail extends Shop {
+  email: string;
+}
+
+interface EditShop {
+  name: string;
+  introduction: string;
+}

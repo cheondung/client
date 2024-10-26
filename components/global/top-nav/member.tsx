@@ -29,7 +29,7 @@ export default function TopNavMember() {
         <DropdownMenuLabel>{session?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={'/my/info'}>
+          <Link href={'/user/info'}>
             <UserCogIcon />
             <span>내 계정</span>
           </Link>
@@ -41,13 +41,13 @@ export default function TopNavMember() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={'/my/trade'}>
+          <Link href={'/user/trade'}>
             <ReceiptTextIcon />
             <span>내 거래</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={'/my/interest'}>
+          <Link href={'/user/interest'}>
             <HeartIcon />
             <span>내 찜</span>
           </Link>

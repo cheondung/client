@@ -12,7 +12,7 @@ export default function SideNavMember() {
 
   return (
     <>
-      <NavLink href={'/my/info'}>
+      <NavLink href={'/user/info'}>
         <UserCogIcon />
         <span>내 계정</span>
       </NavLink>
@@ -20,11 +20,11 @@ export default function SideNavMember() {
         <StoreIcon />
         <span>내 상점</span>
       </NavLink>
-      <NavLink href={'/my/trade'}>
+      <NavLink href={'/user/trade'}>
         <ReceiptTextIcon />
         <span>내 거래</span>
       </NavLink>
-      <NavLink href={'/my/interest'}>
+      <NavLink href={'/user/interest'}>
         <HeartIcon />
         <span>내 찜</span>
       </NavLink>
