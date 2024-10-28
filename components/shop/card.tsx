@@ -16,7 +16,7 @@ export default function ShopCard({ shop }: Readonly<ShopCardProps>) {
     <Card className="p-4 flex gap-4">
       <CardHeader className="p-0">
         <Avatar className="cursor-pointer">
-          <AvatarImage src={`https://github.com/${avatar}`} />
+          <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${avatar}`} />
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
       </CardHeader>

@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getShop, getShopProducts } from '@/lib/shop';
 import { ProductList, ProductListItem } from '@/components/product';
 import { PageItemCount, PageNav } from '@/components/page';
-import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface ShopPageProps {
@@ -10,14 +9,14 @@ interface ShopPageProps {
   searchParams: { page: number };
 }
 
-// '%40' equals '%'
+// '%40' equals '@'
 const HANDLE_PREFIX = '%40';
 
-export default async function ShopPage({ params, searchParams }: Readonly<ShopPageProps>) {
+export default async function ShopDetailPage({ params, searchParams }: Readonly<ShopPageProps>) {
   const { id } = await params;
   const { page = 1 } = await searchParams;
 
-  if (!id.trim().startsWith(HANDLE_PREFIX)) {
+  if (!id.startsWith(HANDLE_PREFIX)) {
     return notFound();
   }
 
@@ -29,7 +28,7 @@ export default async function ShopPage({ params, searchParams }: Readonly<ShopPa
     <main className="lg:container mx-auto pt-24 pb-8 px-8 min-h-screen space-y-8">
       <section className="flex flex-col lg:flex-row items-center gap-8">
         <Avatar className="lg:max-w-lg w-96 h-96">
-          <AvatarImage src={`https://github.com/${avatar}`} />
+          <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${avatar}`} />
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
         <article className="space-y-2 text-center lg:text-left">

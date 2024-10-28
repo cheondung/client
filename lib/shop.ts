@@ -13,3 +13,9 @@ export const editSelfShop = async (request: EditShop) =>
     .put('shop/self', { json: request })
     .json<IdMessageBody>()
     .then((body) => toast.success(body.message));
+
+export const editSelfShopAvatar = async (avatar: string) =>
+  clientAPI
+    .patch('shop/self/avatar', { json: { avatar } })
+    .json<IdMessageBody>()
+    .then((body) => toast.success(body.message));

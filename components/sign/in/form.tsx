@@ -72,7 +72,7 @@ export default function SignInForm() {
         </p>
         <Button type="submit" className="w-full gap-2">
           <KeySquareIcon />
-          로그인
+          <span>로그인</span>
         </Button>
       </form>
     </Form>

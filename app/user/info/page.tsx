@@ -1,16 +1,17 @@
 'use client';
 
-import { UserAvatarForm, UserInfoForm } from '@/components/user';
+import { UserInfoForm } from '@/components/user';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useQuery } from 'react-query';
 import { getSelfShop } from '@/lib/shop';
 import { Button } from '@/components/ui/button';
 import { SquareAsteriskIcon, UserMinusIcon } from 'lucide-react';
 import { useUserModal } from '@/hooks/use-modal';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function UserInfoPage() {
   const { data: shop } = useQuery(['shop', 'self'], getSelfShop);
-  const { openPasswordDialog, openWithdrawDialog } = useUserModal();
+  const { openAvatarDialog, openPasswordDialog, openWithdrawDialog } = useUserModal();
 
   return (
     shop && (
@@ -20,8 +21,14 @@ export default function UserInfoPage() {
             <CardTitle className="text-2xl">회원정보 수정</CardTitle>
             <CardDescription>회원정보 수정을 하시려면 아래 폼을 작성해주세요.</CardDescription>
           </CardHeader>
-          <CardContent className="flex gap-8">
-            <UserAvatarForm {...shop} />
+          <CardContent className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+            <Avatar
+              className="w-32 h-32 cursor-pointer transition-opacity hover:opacity-80"
+              onClick={() => openAvatarDialog(shop.avatar)}
+            >
+              <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${shop.avatar}`} />
+              <AvatarFallback>{shop.name}</AvatarFallback>
+            </Avatar>
             <UserInfoForm shop={shop} />
           </CardContent>
           <CardFooter className="flex justify-end gap-2">

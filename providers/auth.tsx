@@ -32,9 +32,7 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
   }
 
   useEffect(() => {
-    refreshToken()
-      .then((session) => registerSession(session))
-      .catch(() => unregisterSession());
+    refreshToken().then(registerSession).catch(unregisterSession);
   }, []);
 
   return (

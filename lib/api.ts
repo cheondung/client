@@ -10,7 +10,7 @@ const toastError = async (request: KyRequest, options: NormalizedOptions, respon
 
 export const serverAPI = ky.create({ prefixUrl: `${process.env.NEXT_PUBLIC_SERVER_HOST}/api` });
 
-export let clientAPI = ky.create({
+export const clientAPI = ky.create({
   prefixUrl: `${process.env.NEXT_PUBLIC_SERVER_HOST}/api`,
   credentials: 'include',
   hooks: {

@@ -20,8 +20,8 @@ export default function TopNavMember() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={`https://github.com/${session?.avatar}`} />
+        <Avatar className="cursor-pointer transition-opacity hover:opacity-80">
+          <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${session?.avatar}`} />
           <AvatarFallback>{session?.name}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

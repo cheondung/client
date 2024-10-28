@@ -30,7 +30,11 @@ export const signOut = async () => {
   }
 };
 
-export const refreshToken = async () => authAPI.post('refresh').then(handleAuth);
+export const refreshToken = async () =>
+  authAPI
+    .post('refresh')
+    .then(handleAuth)
+    .catch((error) => Promise.reject(error));
 
 const handleAuth = (response: KyResponse) => {
   const Authorization = response.headers.get('Authorization');

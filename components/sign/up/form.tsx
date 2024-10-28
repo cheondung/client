@@ -33,12 +33,11 @@ const formSchema = z
   });
 
 export default function SignUpForm() {
-  const router = useRouter();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: '', shopName: '', password: '', passwordConfirm: '' },
   });
+  const router = useRouter();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     signUp(values)
@@ -109,7 +108,7 @@ export default function SignUpForm() {
         </p>
         <Button type="submit" className="w-full gap-2">
           <UserPlusIcon />
-          회원가입
+          <span>회원가입</span>
         </Button>
       </form>
     </Form>
