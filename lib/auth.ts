@@ -43,8 +43,11 @@ const handleAuth = (response: KyResponse) => {
   }
 
   sessionStorage.setItem('Authorization', Authorization);
+  return decodeAuthorization(Authorization);
+};
 
-  const token = Authorization.substring(7);
+const decodeAuthorization = (authorization: string) => {
+  const token = authorization.substring(7);
   const decodedToken = jwtDecode<CustomJwtPayload>(token);
   return {
     id: decodedToken.sub,

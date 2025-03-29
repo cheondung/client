@@ -17,7 +17,7 @@ import { cn } from '@/lib/utils';
 
 interface ProductSearchCategoryProps {
   categories: ProductCategoryTree[];
-  category: number;
+  category?: number;
 }
 
 export default function ProductSearchCategory({ categories, category }: Readonly<ProductSearchCategoryProps>) {
@@ -44,20 +44,20 @@ export default function ProductSearchCategory({ categories, category }: Readonly
         </MenubarTrigger>
         <MenubarContent>
           {categories.map((categoryL1) =>
-            categoryL1.subCategories ? (
+            categoryL1.subCategories.length > 0 ? (
               <MenubarSub key={categoryL1.id}>
                 <MenubarSubTrigger
-                  className={cn(categoryL1.id === category && 'text-secondary-foreground bg-secondary')}
+                  className={cn(categoryL1.id === category && 'bg-secondary text-secondary-foreground')}
                   onClick={() => setCategory(categoryL1.id)}
                 >
                   {categoryL1.name}
                 </MenubarSubTrigger>
                 <MenubarSubContent>
                   {categoryL1.subCategories.map((categoryL2) =>
-                    categoryL2.subCategories ? (
+                    categoryL2.subCategories.length > 0 ? (
                       <MenubarSub key={categoryL2.id}>
                         <MenubarSubTrigger
-                          className={cn(categoryL2.id === category && 'text-secondary-foreground bg-secondary')}
+                          className={cn(categoryL2.id === category && 'bg-secondary text-secondary-foreground')}
                           onClick={() => setCategory(categoryL2.id)}
                         >
                           {categoryL2.name}
@@ -66,7 +66,7 @@ export default function ProductSearchCategory({ categories, category }: Readonly
                           {categoryL2.subCategories.map((categoryL3) => (
                             <MenubarItem
                               key={categoryL3.id}
-                              className={cn(categoryL3.id === category && 'text-secondary-foreground bg-secondary')}
+                              className={cn(categoryL3.id === category && 'bg-secondary text-secondary-foreground')}
                               onClick={() => setCategory(categoryL3.id)}
                             >
                               {categoryL3.name}
@@ -77,7 +77,7 @@ export default function ProductSearchCategory({ categories, category }: Readonly
                     ) : (
                       <MenubarItem
                         key={categoryL2.id}
-                        className={cn(categoryL2.id === category && 'text-secondary-foreground bg-secondary')}
+                        className={cn(categoryL2.id === category && 'bg-secondary text-secondary-foreground')}
                         onClick={() => setCategory(categoryL2.id)}
                       >
                         {categoryL2.name}
@@ -89,7 +89,7 @@ export default function ProductSearchCategory({ categories, category }: Readonly
             ) : (
               <MenubarItem
                 key={categoryL1.id}
-                className={cn(categoryL1.id === category && 'text-secondary-foreground bg-secondary')}
+                className={cn(categoryL1.id === category && 'bg-secondary text-secondary-foreground')}
                 onClick={() => setCategory(categoryL1.id)}
               >
                 {categoryL1.name}

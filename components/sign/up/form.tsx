@@ -11,35 +11,16 @@ import { useRouter } from 'next/navigation';
 import { signUp } from '@/lib/auth';
 import { setErrors } from '@/lib/form';
 import Link from 'next/link';
-
-const formSchema = z
-  .object({
-    email: z.string().trim().email('이메일 형식이 올바르지 않습니다'),
-    shopName: z
-      .string()
-      .trim()
-      .min(2, '상점명은 최소 2자 이상 입력해주세요')
-      .max(20, '상점명은 최대 20자 이하로 입력해주세요'),
-    password: z
-      .string()
-      .trim()
-      .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-      .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
-    passwordConfirm: z.string().trim(),
-  })
-  .refine((data) => data.password === data.passwordConfirm, {
-    message: '비밀번호가 일치하지 않습니다',
-    path: ['passwordConfirm'],
-  });
+import { signUpSchema } from '@/schemas/auth';
 
 export default function SignUpForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: { email: '', shopName: '', password: '', passwordConfirm: '' },
   });
   const router = useRouter();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof signUpSchema>) {
     signUp(values)
       .then(() => router.replace('/signin'))
       .catch((err) => setErrors(err, form.setError));
@@ -100,7 +81,7 @@ export default function SignUpForm() {
             </FormItem>
           )}
         />
-        <p className="text-sm text-center">
+        <p className="text-center text-sm">
           이미 계정이 있습니까?{' '}
           <Link href={'/signin'} className="text-primary underline">
             로그인하기

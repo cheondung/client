@@ -19,9 +19,8 @@ export default function ProductSearchCard({ children }: Readonly<ProductSearchCa
       <CardContent>
         <Form action="/product" className="space-y-2">
           {children}
-          <Button type="submit" className="w-full gap-2">
-            <SearchIcon strokeWidth={2.5} />
-            <span>검색</span>
+          <Button type="submit" variant="secondary" className="w-full gap-2">
+            <SearchIcon strokeWidth={2.5} /> 검색
           </Button>
         </Form>
       </CardContent>

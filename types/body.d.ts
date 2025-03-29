@@ -9,5 +9,5 @@ interface ErrorBody extends MessageBody {
 }
 
 interface IdMessageBody extends MessageBody {
-  id: string;
+  id: number;
 }

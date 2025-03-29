@@ -5,13 +5,21 @@ import ProductSearchCard from '@/components/product/search/card';
 import ProductSearchCategory from '@/components/product/search/category';
 import ProductSearchQuery from '@/components/product/search/query';
 import ProductSearchInclude from '@/components/product/search/include';
+import ProductControl from '@/components/product/control';
+import ProductDiscountPopover from '@/components/product/discount/popover';
+import ProductInterestToggle from '@/components/product/interest/toggle';
+import ProductPriceHistoryOpen from '@/components/product/price/history/open';
+import ProductPriceHistoryChart from '@/components/product/price/history/chart';
 import ProductImageCarousel from '@/components/product/image/carousel';
 import ProductImageCarouselItem from '@/components/product/image/carousel-item';
-import ProductImageDialog from '@/components/product/image/dialog';
 import ProductCategoryBreadcrumb from '@/components/product/category/breadcrumb';
-import ProductControlDynamic from '@/components/product/control/dynamic';
-import ProductControlInterest from '@/components/product/control/interest';
-import ProductControlChat from '@/components/product/control/chat';
+import ProductPostLink from '@/components/product/post/link';
+import ProductPostCard from '@/components/product/post/card';
+import ProductPostForm from '@/components/product/post/form';
+import ProductPostPosDialog from '@/components/product/post/pos/dialog';
+import ProductPostCategoryMenu from '@/components/product/post/category/menu';
+import ProductEditCard from '@/components/product/edit/card';
+import ProductEditForm from '@/components/product/edit/form';
 
 export {
   ProductList,
@@ -21,11 +29,19 @@ export {
   ProductSearchCategory,
   ProductSearchQuery,
   ProductSearchInclude,
+  ProductControl,
+  ProductDiscountPopover,
+  ProductInterestToggle,
+  ProductPriceHistoryOpen,
+  ProductPriceHistoryChart,
   ProductImageCarousel,
   ProductImageCarouselItem,
-  ProductImageDialog,
   ProductCategoryBreadcrumb,
-  ProductControlDynamic,
-  ProductControlInterest,
-  ProductControlChat,
+  ProductPostLink,
+  ProductPostCard,
+  ProductPostForm,
+  ProductPostPosDialog,
+  ProductPostCategoryMenu,
+  ProductEditCard,
+  ProductEditForm,
 };

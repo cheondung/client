@@ -1,34 +1,39 @@
+import { productSearchSchema } from '@/schemas/product';
 import { getProductCategories, getProducts } from '@/lib/product';
 import {
   ProductList,
   ProductListItem,
+  ProductPostLink,
   ProductSearchCard,
   ProductSearchCategory,
   ProductSearchInclude,
   ProductSearchQuery,
 } from '@/components/product';
-import React from 'react';
 import { PageItemCount, PageNav } from '@/components/page';
 
 interface ProductListPageProps {
-  searchParams: SearchProduct;
+  searchParams: SearchParams;
 }
 
 export default async function ProductListPage({ searchParams }: Readonly<ProductListPageProps>) {
-  const [products, categories] = await Promise.all([getProducts(await searchParams), getProductCategories()]);
-  const { category, query = '', includeUsed = true, includeSoldOut = true } = await searchParams;
+  const parsedSearchParams = productSearchSchema.parse(await searchParams);
+  const [products, categories] = await Promise.all([getProducts(parsedSearchParams), getProductCategories()]);
 
   return (
-    <main className="lg:container mx-auto pt-24 pb-8 px-8 min-h-screen space-y-8">
+    <main className="mx-auto min-h-screen space-y-8 px-8 pb-8 pt-24 lg:container">
+      <h2 className="text-center text-2xl font-bold">상품 찾기</h2>
       <ProductSearchCard>
         <div className="flex gap-2">
-          <ProductSearchCategory categories={categories} category={Number(category)} />
-          <ProductSearchQuery query={query} />
+          <ProductSearchCategory categories={categories} {...parsedSearchParams} />
+          <ProductSearchQuery {...parsedSearchParams} />
         </div>
-        <div className="flex flex-col lg:flex-row gap-2">
-          <ProductSearchInclude includeUsed={includeUsed} includeSoldOut={includeSoldOut} />
+        <div className="flex flex-col gap-2 lg:flex-row">
+          <ProductSearchInclude {...parsedSearchParams} />
         </div>
       </ProductSearchCard>
+      <div className="flex justify-end gap-4">
+        <ProductPostLink />
+      </div>
       <section className="space-y-4">
         <ProductList>
           {products.content.map((product) => (

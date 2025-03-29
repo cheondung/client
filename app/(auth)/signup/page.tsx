@@ -16,7 +16,7 @@ export default function SignUpPage() {
   }, [status, router]);
 
   return (
-    <main className="lg:container mx-auto pt-24 pb-8 px-8 min-h-screen space-y-8">
+    <main className="mx-auto min-h-screen space-y-8 px-8 pb-8 pt-24 lg:container">
       <SignUpCard>
         <SignUpForm />
       </SignUpCard>

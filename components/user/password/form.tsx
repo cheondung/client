@@ -11,34 +11,16 @@ import { updateUserPassword } from '@/lib/user';
 import { useUserModal } from '@/hooks/use-modal';
 import { setErrors } from '@/lib/form';
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
-
-const formSchema = z
-  .object({
-    oldPassword: z
-      .string()
-      .trim()
-      .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-      .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
-    newPassword: z
-      .string()
-      .trim()
-      .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-      .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
-    newPasswordConfirm: z.string().trim(),
-  })
-  .refine((data) => data.newPassword === data.newPasswordConfirm, {
-    message: '비밀번호가 일치하지 않습니다',
-    path: ['passwordConfirm'],
-  });
+import { updatePasswordSchema } from '@/schemas/user';
 
 export default function UserPasswordForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof updatePasswordSchema>>({
+    resolver: zodResolver(updatePasswordSchema),
     defaultValues: { oldPassword: '', newPassword: '', newPasswordConfirm: '' },
   });
   const { closePasswordDialog } = useUserModal();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof updatePasswordSchema>) {
     updateUserPassword(values)
       .then(closePasswordDialog)
       .catch((err) => setErrors(err, form.setError));
@@ -86,7 +68,7 @@ export default function UserPasswordForm() {
             </FormItem>
           )}
         />
-        <div className="flex flex-col lg:flex-row gap-2">
+        <div className="flex flex-col gap-2 lg:flex-row">
           <Button type="button" variant="outline" className="w-full" onClick={closePasswordDialog}>
             <CloseIcon />
             <span>취소</span>

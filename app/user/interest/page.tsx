@@ -15,8 +15,9 @@ export default function UserInterestPage() {
 
   return (
     products && (
-      <main className="lg:container mx-auto pt-24 pb-8 px-8 min-h-screen space-y-8">
+      <main className="mx-auto min-h-screen space-y-8 px-8 pb-8 pt-24 lg:container">
         <section className="space-y-4">
+          <h2 className="text-center text-2xl font-semibold">관심 상품</h2>
           <ProductList>
             {products.map((product) => (
               <ProductListItem key={product.id} product={product} />

@@ -5,9 +5,12 @@ import { Toaster } from 'sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ReactQueryProvider from '@/providers/react-query';
 import AuthProvider from '@/providers/auth';
-import ProductModalProvider from '@/providers/product-modal';
-import GlobalHeader from '@/components/global/header';
+import GlobalHeader from '@/components/global/header/header';
+import GlobalFooter from '@/components/global/footer/footer';
+import GlobalModalProvider from '@/providers/global-modal';
 import './globals.css';
+import KakaoMapProvider from '@/providers/kakao-map';
+import SupportProvider from '@/providers/support';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,10 +23,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <ReactQueryProvider>
           <TooltipProvider>
             <AuthProvider>
-              <ProductModalProvider>
-                <GlobalHeader />
-                {children}
-              </ProductModalProvider>
+              <KakaoMapProvider>
+                <GlobalModalProvider>
+                  <SupportProvider>
+                    <GlobalHeader />
+                    {children}
+                    <GlobalFooter />
+                  </SupportProvider>
+                </GlobalModalProvider>
+              </KakaoMapProvider>
             </AuthProvider>
           </TooltipProvider>
         </ReactQueryProvider>

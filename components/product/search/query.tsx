@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input';
 
 interface ProductSearchQueryProps {
-  query: string;
+  query?: string;
 }
 
 export default function ProductSearchQuery({ query }: Readonly<ProductSearchQueryProps>) {

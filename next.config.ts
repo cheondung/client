@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'media.bunjang.co.kr',
         pathname: '/product/**',
       },
+      {
+        protocol: 'https',
+        hostname: process.env.BLOB_HOST as string,
+        pathname: '/**',
+      },
     ],
   },
 };

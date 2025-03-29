@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { StoreIcon } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
+import { parseImagePath } from '@/lib/parse';
 
 interface ShopCardProps {
   shop: Shop;
@@ -13,14 +14,14 @@ export default function ShopCard({ shop }: Readonly<ShopCardProps>) {
   const { id, name, introduction, avatar } = shop;
 
   return (
-    <Card className="p-4 flex gap-4">
+    <Card className="flex gap-4 p-4">
       <CardHeader className="p-0">
         <Avatar className="cursor-pointer">
-          <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${avatar}`} />
+          <AvatarImage src={parseImagePath(avatar, 'VERCEL')} />
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
       </CardHeader>
-      <CardContent className="p-0 w-full flex flex-col justify-between">
+      <CardContent className="flex w-full flex-col justify-between p-0">
         <CardTitle>{name}</CardTitle>
         <CardDescription className="line-clamp-1">
           {introduction ? introduction : '아직 상점 소개가 등록되지 않았습니다.'}

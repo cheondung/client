@@ -1,8 +1,6 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { parseProductImageSrc } from '@/lib/parse';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { parseImagePath } from '@/lib/parse';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,29 +9,35 @@ interface ProductListItemProps {
 }
 
 export default function ProductListItem({ product }: Readonly<ProductListItemProps>) {
-  const { id, name, thumbnail, saleStatusLabel, conditionLabel, price } = product;
+  const {
+    id,
+    name,
+    thumbnail: { path, source },
+    saleStatusLabel,
+    conditionLabel,
+    price,
+  } = product;
 
   return (
-    <Card className="flex flex-col overflow-hidden">
-      <CardHeader className="relative mb-6 aspect-square">
-        <Image src={parseProductImageSrc(thumbnail)} alt={name} fill />
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <CardTitle>{name}</CardTitle>
-        <div className="flex flex-wrap items-start gap-1">
+    <Link href={`/product/${id}`} className="group">
+      <Card className="flex h-full flex-col overflow-hidden transition-colors group-hover:bg-accent">
+        <CardHeader className="relative mb-6 aspect-square overflow-hidden border-b">
+          <Image
+            src={parseImagePath(path, source)}
+            alt={name}
+            fill
+            className="object-cover transition-transform group-hover:scale-110"
+          />
+        </CardHeader>
+        <CardContent>
+          <CardTitle className="leading-0.5">{name}</CardTitle>
+        </CardContent>
+        <CardFooter className="mt-auto flex flex-wrap items-start gap-1">
           <Badge variant="secondary">{saleStatusLabel}</Badge>
           <Badge variant="outline">{conditionLabel}</Badge>
           <span className="ml-auto font-semibold">{price.toLocaleString()}원</span>
-        </div>
-      </CardContent>
-      <CardFooter className="mt-auto">
-        <Button variant="outline" className="w-full" asChild>
-          <Link href={`/product/${id}`}>
-            <ChevronRight />
-            <span>자세히 보기</span>
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </Link>
   );
 }

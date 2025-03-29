@@ -1,8 +1,10 @@
 import { useContext } from 'react';
-import { ProductModalContext } from '@/providers/product-modal';
+import { GlobalModalContext } from '@/providers/global-modal';
 import { UserModalContext } from '@/providers/user-modal';
+import { ChatModalContext } from '@/providers/chat-modal';
 
-const useProductModal = () => useContext(ProductModalContext);
+const useGlobalModal = () => useContext(GlobalModalContext);
 const useUserModal = () => useContext(UserModalContext);
+const useChatModal = () => useContext(ChatModalContext);
 
-export { useProductModal, useUserModal };
+export { useGlobalModal, useUserModal, useChatModal };

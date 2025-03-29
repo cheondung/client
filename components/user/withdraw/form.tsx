@@ -11,24 +11,17 @@ import { useUserModal } from '@/hooks/use-modal';
 import { setErrors } from '@/lib/form';
 import { useAuth } from '@/hooks/use-auth';
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
-
-const formSchema = z.object({
-  password: z
-    .string()
-    .trim()
-    .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-    .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
-});
+import { withdrawSchema } from '@/schemas/user';
 
 export default function UserWithdrawForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof withdrawSchema>>({
+    resolver: zodResolver(withdrawSchema),
     defaultValues: { password: '' },
   });
   const { closeWithdrawDialog } = useUserModal();
   const { unregisterSession } = useAuth();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof withdrawSchema>) {
     withdrawUser(values.password)
       .then(() => {
         closeWithdrawDialog();
@@ -53,7 +46,7 @@ export default function UserWithdrawForm() {
             </FormItem>
           )}
         />
-        <div className="flex flex-col lg:flex-row gap-2">
+        <div className="flex flex-col gap-2 lg:flex-row">
           <Button type="button" variant="outline" className="w-full" onClick={closeWithdrawDialog}>
             <CloseIcon />
             <span>취소</span>

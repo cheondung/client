@@ -1,20 +1,14 @@
 import { clientAPI, serverAPI } from '@/lib/api';
 import { toast } from 'sonner';
+import { z } from 'zod';
+import { productDiscountSchema, productPostSchema, productSearchSchema } from '@/schemas/product';
 
-export const getProducts = (searchParams: SearchProduct) =>
-  serverAPI
-    .get('product', {
-      searchParams: {
-        category: searchParams.category || '',
-        query: searchParams.query || '',
-        includeUsed: searchParams.includeUsed ? 'true' : 'false',
-        includeSoldOut: searchParams.includeSoldOut ? 'true' : 'false',
-        page: searchParams.page ? searchParams.page.toString() : '1',
-      },
-    })
-    .json<Page<Product>>();
+export const getProducts = (searchParams: z.infer<typeof productSearchSchema>) =>
+  serverAPI.get('product', { searchParams }).json<Page<Product>>();
 
 export const getProductDetail = (id: number) => serverAPI.get(`product/${id}`).json<ProductDetail>();
+
+export const getSimilarProducts = (id: number) => serverAPI.get(`product/${id}/similar`).json<Product[]>();
 
 export const getProductCategories = () =>
   serverAPI.get('product/category', { cache: 'force-cache' }).json<ProductCategoryTree[]>();
@@ -35,3 +29,14 @@ export const removeInterest = (id: number) =>
     .delete(`product/${id}/interest`)
     .json<MessageBody>()
     .then((body) => toast.success(body.message));
+
+export const postProduct = async (values: z.infer<typeof productPostSchema>) =>
+  clientAPI.post('product', { json: { ...values } }).json<IdMessageBody>();
+
+export const editProduct = (id: number, json: z.infer<typeof productPostSchema>) =>
+  clientAPI.put(`product/${id}`, { json }).json<IdMessageBody>();
+
+export const setProductDiscount = (id: number, json: z.infer<typeof productDiscountSchema>) =>
+  clientAPI.post(`product/${id}/discount`, { json }).json<IdMessageBody>();
+
+export const unsetProductDiscount = (id: number) => clientAPI.delete(`product/${id}/discount`).json<IdMessageBody>();

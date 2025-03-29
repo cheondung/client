@@ -13,28 +13,20 @@ import { setErrors } from '@/lib/form';
 import { refreshToken } from '@/lib/auth';
 import { useAuth } from '@/hooks/use-auth';
 import { Label } from '@/components/ui/label';
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, '상점명은 최소 2자 이상 입력해주세요')
-    .max(20, '상점명은 최대 20자 이하로 입력해주세요'),
-  introduction: z.string().trim().max(1024, '상점 소개는 1024자 이하로 입력해주세요'),
-});
+import { editShopInfoSchema } from '@/schemas/shop';
 
 interface UserInfoFormProps {
   shop: ShopDetail;
 }
 
 export default function UserInfoForm({ shop }: Readonly<UserInfoFormProps>) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof editShopInfoSchema>>({
+    resolver: zodResolver(editShopInfoSchema),
     defaultValues: { ...shop, introduction: shop.introduction || '' },
   });
   const { registerSession, unregisterSession } = useAuth();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof editShopInfoSchema>) {
     editSelfShop(values)
       .then(() => refreshToken().then(registerSession).catch(unregisterSession))
       .catch((err) => setErrors(err, form.setError));

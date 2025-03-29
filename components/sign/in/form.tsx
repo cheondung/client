@@ -11,25 +11,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from '@/lib/auth';
 import { setErrors } from '@/lib/form';
 import Link from 'next/link';
-
-const formSchema = z.object({
-  email: z.string().trim().email('이메일 형식이 올바르지 않습니다'),
-  password: z
-    .string()
-    .trim()
-    .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-    .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
-});
+import { signInSchema } from '@/schemas/auth';
 
 export default function SignInForm() {
   const { registerSession } = useAuth();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: { email: '', password: '' },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof signInSchema>) {
     signIn(values.email, values.password)
       .then((session) => registerSession(session))
       .catch((error) => setErrors(error, form.setError));
@@ -64,7 +56,7 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        <p className="text-sm text-center">
+        <p className="text-center text-sm">
           계정이 없으신가요?{' '}
           <Link href={'/signup'} className="text-primary underline">
             회원가입하기

@@ -1,11 +1,3 @@
-interface SearchProduct {
-  category: number;
-  query: string;
-  includeUsed: boolean;
-  includeSoldOut: boolean;
-  page: number;
-}
-
 interface Product {
   id: number;
   name: string;
@@ -20,7 +12,6 @@ interface Product {
 
 interface ProductDetail {
   id: number;
-  bunjangId: number;
   name: string;
   description: string;
   price: number;
@@ -33,12 +24,20 @@ interface ProductDetail {
   status: ProductStatus;
   categories: ProductCategory[];
   images: ProductImage[];
+  priceHistories: ProductPriceHistory[];
+  discount: ProductDiscount;
   shop: Shop;
 }
 
 interface ProductImage {
   path: string;
-  source: 'S3' | 'BUNJANG';
+  source: 'VERCEL' | 'BUNJANG';
+}
+
+interface ProductPriceHistory {
+  id: number;
+  price: number;
+  date: Date;
 }
 
 interface ProductCategory {
@@ -48,6 +47,18 @@ interface ProductCategory {
 
 interface ProductCategoryTree extends ProductCategory {
   subCategories: ProductCategoryTree[];
+}
+
+interface ProductDiscount {
+  price: number;
+  duration: number;
+  lastDiscountedAt: string;
+}
+
+interface ProductPos {
+  street: string;
+  lat: number;
+  lng: number;
 }
 
 type ProductCondition = 'NEW' | 'USED';

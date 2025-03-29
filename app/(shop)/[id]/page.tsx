@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
-import { getShop, getShopProducts } from '@/lib/shop';
+import { getShopDetail, getShopProducts } from '@/lib/shop';
 import { ProductList, ProductListItem } from '@/components/product';
 import { PageItemCount, PageNav } from '@/components/page';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { parseImagePath } from '@/lib/parse';
 
 interface ShopPageProps {
-  params: { id: string };
-  searchParams: { page: number };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ page: number }>;
 }
 
 // '%40' equals '@'
@@ -20,26 +21,26 @@ export default async function ShopDetailPage({ params, searchParams }: Readonly<
     return notFound();
   }
 
-  const shop = await getShop(Number(id.replace(HANDLE_PREFIX, '')));
+  const shop = await getShopDetail(Number(id.replace(HANDLE_PREFIX, '')));
   const products = await getShopProducts(Number(id.replace(HANDLE_PREFIX, '')), page);
   const { name, introduction, avatar } = shop;
 
   return (
-    <main className="lg:container mx-auto pt-24 pb-8 px-8 min-h-screen space-y-8">
-      <section className="flex flex-col lg:flex-row items-center gap-8">
-        <Avatar className="lg:max-w-lg w-96 h-96">
-          <AvatarImage src={`${process.env.NEXT_PUBLIC_BLOB_HOST}/avatars/${avatar}`} />
+    <main className="mx-auto min-h-screen space-y-8 px-8 pb-8 pt-24 lg:container">
+      <section className="flex flex-col items-center gap-8 lg:flex-row">
+        <Avatar className="size-96 border lg:max-w-lg">
+          <AvatarImage src={parseImagePath(avatar, 'VERCEL')} />
           <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
         <article className="space-y-2 text-center lg:text-left">
-          <h2 className="font-semibold text-2xl">{name}</h2>
+          <h2 className="text-2xl font-semibold">{name}</h2>
           <p className="whitespace-pre text-wrap">
             {introduction ? introduction : '아직 상점 소개가 등록되지 않았습니다.'}
           </p>
         </article>
       </section>
       <section className="space-y-4">
-        <h3 className="font-semibold text-2xl">{name}님의 상품</h3>
+        <h3 className="text-2xl font-semibold">{name}님의 상품</h3>
         <ProductList>
           {products.content.map((product) => (
             <ProductListItem key={product.id} product={product} />

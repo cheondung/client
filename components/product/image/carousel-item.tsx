@@ -1,21 +1,27 @@
 'use client';
 
 import { CarouselItem } from '@/components/ui/carousel';
-import { parseProductImageSrc } from '@/lib/parse';
 import Image from 'next/image';
-import { useProductModal } from '@/hooks/use-modal';
+import { useGlobalModal } from '@/hooks/use-modal';
+import { parseImagePath } from '@/lib/parse';
 
 interface ProductImageCarouselItemProps {
   image: ProductImage;
   alt: string;
 }
 
-export default function ProductImageCarouselItem({ image, alt }: Readonly<ProductImageCarouselItemProps>) {
-  const { openImageDialog } = useProductModal();
+export default function ProductImageCarouselItem({
+  image: { path, source },
+  alt,
+}: Readonly<ProductImageCarouselItemProps>) {
+  const { openImageDialog } = useGlobalModal();
 
   return (
-    <CarouselItem className="relative aspect-square p-0 cursor-pointer" onClick={() => openImageDialog(image)}>
-      <Image src={parseProductImageSrc(image)} alt={alt} fill className="rounded-lg" />
+    <CarouselItem
+      className="relative aspect-square cursor-pointer p-0"
+      onClick={() => openImageDialog(parseImagePath(path, source))}
+    >
+      <Image src={parseImagePath(path, source)} alt={alt} fill className="rounded-lg object-contain" />
     </CarouselItem>
   );
 }

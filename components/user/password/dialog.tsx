@@ -1,5 +1,5 @@
 import { useUserModal } from '@/hooks/use-modal';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { UserPasswordForm } from '@/components/user';
 
 export default function UserPasswordDialog() {
@@ -8,8 +8,10 @@ export default function UserPasswordDialog() {
   return (
     <Dialog open={isPasswordDialogOpen} onOpenChange={closePasswordDialog}>
       <DialogContent>
-        <DialogTitle>비밀번호 변경</DialogTitle>
-        <DialogDescription>비밀번호를 변경하시려면 아래 폼에 새로운 비밀번호를 입력하세요.</DialogDescription>
+        <DialogHeader>
+          <DialogTitle>비밀번호 변경</DialogTitle>
+          <DialogDescription>비밀번호를 변경하시려면 아래 폼에 새로운 비밀번호를 입력하세요.</DialogDescription>
+        </DialogHeader>
         <UserPasswordForm />
       </DialogContent>
     </Dialog>
