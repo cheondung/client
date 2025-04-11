@@ -19,7 +19,7 @@ export default function SupportResponse({ content, products }: Readonly<SupportR
         <Carousel>
           <CarouselPrevious className="-left-4 z-10 bg-background/50" />
           <CarouselContent>
-            {products?.map(({ id, thumbnail: { path, source }, name, price }) => (
+            {products?.map(({ id, thumbnail: { path, source }, name }) => (
               <CarouselItem key={id} className="basis-1/2">
                 <Link href={`/product/${id}`} className="group">
                   <Card className="flex h-full flex-col overflow-hidden transition-colors group-hover:bg-accent">

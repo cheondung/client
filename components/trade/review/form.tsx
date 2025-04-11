@@ -59,11 +59,11 @@ export default function TradeReviewForm({ tradeId }: Readonly<TradeReviewFormPro
             <FormField
               control={form.control}
               name="score"
-              render={({ field, ref }) => (
+              render={({ field }) => (
                 <FormItem>
                   <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
                     <FormControl>
-                      <SelectTrigger ref={ref} className="w-fit">
+                      <SelectTrigger className="w-fit">
                         <SelectValue placeholder="점수를 입력해주세요" />
                       </SelectTrigger>
                     </FormControl>

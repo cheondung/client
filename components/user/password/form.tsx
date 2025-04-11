@@ -6,11 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { SquareAsteriskIcon } from 'lucide-react';
+import { SquareAsteriskIcon, XIcon } from 'lucide-react';
 import { updateUserPassword } from '@/lib/user';
 import { useUserModal } from '@/hooks/use-modal';
 import { setErrors } from '@/lib/form';
-import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
 import { updatePasswordSchema } from '@/schemas/user';
 
 export default function UserPasswordForm() {
@@ -70,7 +69,7 @@ export default function UserPasswordForm() {
         />
         <div className="flex flex-col gap-2 lg:flex-row">
           <Button type="button" variant="outline" className="w-full" onClick={closePasswordDialog}>
-            <CloseIcon />
+            <XIcon />
             <span>취소</span>
           </Button>
           <Button type="submit" className="w-full">

@@ -21,15 +21,15 @@ interface ProductDiscountPopoverProps {
 export default function ProductDiscountPopover({ productId, discount }: Readonly<ProductDiscountPopoverProps>) {
   const form = useForm<z.infer<typeof productDiscountSchema>>({
     resolver: zodResolver(productDiscountSchema),
-    defaultValues: { price: discount?.price, duration: discount?.duration },
+    defaultValues: { price: discount?.price.toString(), duration: discount?.duration.toString() },
   });
 
   function onUnset() {
     unsetProductDiscount(productId)
       .then((body) => {
         toast.success(body.message);
-        form.setValue('price', 0);
-        form.setValue('duration', 0);
+        form.setValue('price', '0');
+        form.setValue('duration', '0');
       })
       .catch((err) => setErrors(err, form.setError));
   }

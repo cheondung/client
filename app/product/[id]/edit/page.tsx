@@ -18,8 +18,8 @@ export default async function ProductEditPage({ params }: Readonly<ProductEditPa
           defaultValues={{
             name: product.name,
             description: product.description,
-            price: product.price,
-            shippingFee: product.shippingFee,
+            price: product.price.toString(),
+            shippingFee: product.shippingFee.toString(),
             isUsed: product.condition === 'USED',
             categoryId: product.categories[product.categories.length - 1].id,
             images: product.images,

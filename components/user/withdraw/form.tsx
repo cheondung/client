@@ -5,12 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { UserMinusIcon } from 'lucide-react';
+import { UserMinusIcon, XIcon } from 'lucide-react';
 import { withdrawUser } from '@/lib/user';
 import { useUserModal } from '@/hooks/use-modal';
 import { setErrors } from '@/lib/form';
 import { useAuth } from '@/hooks/use-auth';
-import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
 import { withdrawSchema } from '@/schemas/user';
 
 export default function UserWithdrawForm() {
@@ -48,7 +47,7 @@ export default function UserWithdrawForm() {
         />
         <div className="flex flex-col gap-2 lg:flex-row">
           <Button type="button" variant="outline" className="w-full" onClick={closeWithdrawDialog}>
-            <CloseIcon />
+            <XIcon />
             <span>취소</span>
           </Button>
           <Button type="submit" className="w-full gap-2">
