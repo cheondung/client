@@ -12,7 +12,8 @@ export const signUpSchema = z
       .string()
       .trim()
       .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-      .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
+      .max(20, '비밀번호는 최대 20자 이하로 입력해주세요')
+      .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&+=]).{8,20}$/, '비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.'),
     passwordConfirm: z.string().trim(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
@@ -26,5 +27,6 @@ export const signInSchema = z.object({
     .string()
     .trim()
     .min(8, '비밀번호는 최소 8자 이상 입력해주세요')
-    .max(20, '비밀번호는 최대 20자 이하로 입력해주세요'),
+    .max(20, '비밀번호는 최대 20자 이하로 입력해주세요')
+    .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&+=]).{8,20}$/, '비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.'),
 });

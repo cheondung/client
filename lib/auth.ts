@@ -3,8 +3,16 @@ import { KyResponse } from 'ky';
 import { toast } from 'sonner';
 import { jwtDecode } from 'jwt-decode';
 
-export const signUp = async (requestBody: SignUpDTO) => {
-  const response = await authAPI.post('signup', { json: requestBody });
+export const requestSignUp = async (requestBody: SignUpDTO) => {
+  const response = await authAPI.post('signup/request', { json: requestBody });
+  if (response.ok) {
+    const body = await response.json<MessageBody>();
+    toast.success(body.message);
+  }
+};
+
+export const confirmSignUp = async (email: string, token: string) => {
+  const response = await authAPI.post('signup/confirm', { searchParams: { email, token } });
   if (response.ok) {
     const body = await response.json<MessageBody>();
     toast.success(body.message);

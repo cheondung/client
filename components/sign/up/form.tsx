@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { UserPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { signUp } from '@/lib/auth';
+import { requestSignUp } from '@/lib/auth';
 import { setErrors } from '@/lib/form';
 import Link from 'next/link';
 import { signUpSchema } from '@/schemas/auth';
@@ -21,8 +21,8 @@ export default function SignUpForm() {
   const router = useRouter();
 
   function onSubmit(values: z.infer<typeof signUpSchema>) {
-    signUp(values)
-      .then(() => router.replace('/signin'))
+    requestSignUp(values)
+      .then(() => router.replace('/'))
       .catch((err) => setErrors(err, form.setError));
   }
 
