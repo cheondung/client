@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { SupportRequest, SupportResponse } from '@/components/support';
 import { useSupport } from '@/hooks/use-support';
 import { FormEvent, useState } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function SupportWidget() {
   const { responses, requestSupport } = useSupport();
@@ -36,6 +37,7 @@ export default function SupportWidget() {
               <SupportRequest key={index} {...response} />
             )
           )}
+          {responses.length > 0 && !responses[responses.length - 1]?.fromBot && <Skeleton className="h-9 w-40" />}
         </div>
         <hr />
         <form className="flex w-full gap-2 p-2" onSubmit={handleSubmit}>
